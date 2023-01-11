@@ -4,7 +4,12 @@
   "description": "This is backend of nurse management",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "make:migration":"yarn knex migrate:make --knexfile src/knexfile.js", 
+    "migrate":"yarn knex migrate:latest --knexfile src/knexfile.js",
+    "rollback":"yarn knex migrate:rollback --knexfile src/knexfile.js",
+    "make:seed":"yarn knex seed:make --knexfile src/knexfile.js",
+    "seed":"yarn knex seed:run --knexfile src/knexfile.js"
   },
   "repository": {
     "type": "git",
