@@ -23,7 +23,7 @@ export async function up(knex: Knex): Promise<void> {
     table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
     table.timestamp("updated_at").notNullable().defaultTo(knex.fn.now());
     table.integer("created_by").unsigned().notNullable();
-    table.foreign("created_by").references("id").inTable("user");
+    table.foreign("created_by").references("id").inTable("User");
     table.boolean("is_deleted").defaultTo(false);
   });
 }
