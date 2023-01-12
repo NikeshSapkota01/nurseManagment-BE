@@ -4,6 +4,7 @@
 - [Yarn](https://yarnpkg.com/en/docs/install)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-#### Make migration
+#### Make migration to create a new migration if needed
 
     $ yarn run make:migration user
+    $ yarn run make:migration nurse
