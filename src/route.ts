@@ -1,5 +1,7 @@
 import { Request, Response, Router } from "express";
 
+import userRoutes from "./routes/user.route";
+
 /**
  * Contains all API routes for the application.
  */
@@ -13,5 +15,7 @@ router.get("/", (_req: Request, res: Response) => {
     message: "this is a get request",
   });
 });
+
+router.use("/users", userRoutes);
 
 export default router;
