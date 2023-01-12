@@ -1,26 +1,22 @@
 import { Response, Router } from "express";
 
+import * as userController from "../controllers/users.controller";
+
 const router = Router();
 
 /**
  * GET /api/users
  */
-router.get("/", (_, res: Response) => {
-  res.send("TODO: userController.fetchAll");
-});
+router.get("/", userController.fetchAll);
 
 /**
  * GET /api/users/:id
  */
-router.get("/:id", (_, res: Response) => {
-  res.send("TODO: userController.fetchById");
-});
+router.get("/:id", userController.fetchById);
 
 /**
  * POST /api/users
  */
-router.post("/", (_, res: Response) => {
-  res.send("TODO: userController.create");
-});
+router.post("/", userController.create);
 
 export default router;
