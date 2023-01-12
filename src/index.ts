@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import compression from "compression";
 import morgan from "morgan";
+import routes from "./route";
 
 require("dotenv").config();
 
@@ -16,6 +17,8 @@ app.use(
   })
 );
 app.use(morgan("dev"));
+
+app.use("/api", routes);
 
 const { PORT = 4000 } = process.env;
 
