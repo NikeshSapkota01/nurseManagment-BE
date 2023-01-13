@@ -1,11 +1,4 @@
-interface User {
-  id?: string;
-  name?: string;
-  email?: string;
-  password?: string;
-  created_at?: Date;
-  updated_at?: Date;
-}
+import * as User from "../models/User.model";
 
 /**
  * Get all users.
@@ -13,7 +6,7 @@ interface User {
  * @returns {Promise}
  */
 export function getAllUsers() {
-  return "TODO: UserModal.fetchAll()";
+  return User.fetchAllUsers();
 }
 
 /**
@@ -32,8 +25,12 @@ export function getUser(id: Number | String) {
  * @param   {Object}  user
  * @returns {Promise}
  */
-export function createUser(user: User) {
-  return "TODO: User.checkuserexists then addNewUser(user)";
+export async function checkUserExists(data: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  return User.checkForUser(data.name);
 }
 
 /**
@@ -42,6 +39,10 @@ export function createUser(user: User) {
  * @param   {Object}  user
  * @returns {Promise}
  */
-export function addUser(user: User) {
-  return "TODO: UserModal.addnewUser";
+export function addUser(data: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  return User.addNewUser(data);
 }

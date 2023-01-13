@@ -10,9 +10,13 @@ import * as userService from "../services/user.service";
  * @param {Response} res
  * @param {Function} next
  */
-export function fetchAll(_req: Request, res: Response, next: NextFunction) {
+export async function fetchAll(
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const data = userService.getAllUsers();
+    const data = await userService.getAllUsers();
     res.json({ data });
   } catch (err) {
     next(err);
@@ -26,9 +30,14 @@ export function fetchAll(_req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {Function} next
  */
-export function fetchById(req: Request, res: Response, next: NextFunction) {
+export async function fetchById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const data = userService.getUser(req.params.id);
+    let id = parseInt(req.params.id);
+    const data = await userService.getUser(id);
     res.json({ data });
   } catch (err) {
     next(err);
@@ -42,11 +51,18 @@ export function fetchById(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {Function} next
  */
-export function create(req: Request, res: Response, next: NextFunction) {
+export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = userService.createUser(req.body);
-    res.status(HttpStatus.CREATED).json({ data });
+    const data = await userService.addUser(req.body);
+
+    res.status(HttpStatus.CREATED).json({ data: "User created successfully!" });
   } catch (err) {
-    next(err);
+    if (err.code === "23505") {
+      res
+        .status(HttpStatus.CONFLICT)
+        .json({ data: "User with the same email already exists" });
+    } else {
+      next(err);
+    }
   }
 }
