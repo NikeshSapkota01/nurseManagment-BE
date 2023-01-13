@@ -12,3 +12,11 @@
 #### Run migration
 
     $ yarn run migrate
+
+### make seed
+
+    $ yarn run make:seed User                                      │
+
+### run seed to insert some data
+
+    $ yarn run seed

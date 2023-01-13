@@ -7,7 +7,7 @@ import { Knex } from "knex";
  * @returns {Promise}
  */
 
-const table_name = "User"
+const table_name = "User";
 
 exports.seed = function (knex: Knex) {
   return knex(table_name)
@@ -15,15 +15,15 @@ exports.seed = function (knex: Knex) {
     .then(() => {
       return knex(table_name).insert([
         {
-          colName: 'rowValue',
-          colName2: 'rowValue',
-          colName3: 'rowValue'
+          name: "Nikesh",
+          email: "nikesh@gmail.com",
+          password: "Abcd@123",
         },
         {
-          colName: 'rowValue',
-          colName2: 'rowValue',
-          colName3: 'rowValue'
-        }
+          name: "SomeName",
+          email: "nikesh1@gmail.com",
+          password: "Abcd@123",
+        },
       ]);
     });
-}
+};
