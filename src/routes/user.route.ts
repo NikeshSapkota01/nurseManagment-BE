@@ -2,6 +2,10 @@ import { Response, Router } from "express";
 
 import * as userController from "../controllers/users.controller";
 
+import validateRequest from "../utils/validate";
+
+import { createUserSchema } from "../validators/user.validator";
+
 const router = Router();
 
 /**
@@ -17,6 +21,6 @@ router.get("/:id", userController.fetchById);
 /**
  * POST /api/users
  */
-router.post("/", userController.create);
+router.post("/", validateRequest(createUserSchema), userController.create);
 
 export default router;
