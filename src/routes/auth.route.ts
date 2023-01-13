@@ -1,19 +1,17 @@
 import { Response, Router } from "express";
 
+import * as authController from "../controllers/auth.controller";
+
 const router = Router();
 
 /**
  * POST /api/auth/refresh
  */
-router.post("/refresh", (_, res: Response) => {
-  res.send("TODO: refreshTokenController");
-});
+router.post("/refresh", authController.refreshToken);
 
 /**
  * POST /api/auth/login
  */
-router.post("/login", (_, res: Response) => {
-  res.send("TODO: loginController");
-});
+router.post("/login", authController.login);
 
 export default router;
