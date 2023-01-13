@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 
 import userRoutes from "./routes/user.route";
+import authRoute from "./routes/auth.route";
 
 /**
  * Contains all API routes for the application.
@@ -12,10 +13,11 @@ const router = Router();
  */
 router.get("/", (_req: Request, res: Response) => {
   res.json({
-    data: "this is a get request",
+    AppName: process.env.APP_NAME,
   });
 });
 
+router.use("/auth", authRoute);
 router.use("/users", userRoutes);
 
 export default router;
