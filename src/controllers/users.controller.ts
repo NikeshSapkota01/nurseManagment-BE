@@ -1,6 +1,8 @@
 import HttpStatus from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
+import * as userService from "../services/user.service";
+
 /**
  * Get all users.
  *
@@ -10,7 +12,8 @@ import { NextFunction, Request, Response } from "express";
  */
 export function fetchAll(_req: Request, res: Response, next: NextFunction) {
   try {
-    res.send("TODO: getAllUsers");
+    const data = userService.getAllUsers();
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -25,7 +28,8 @@ export function fetchAll(_req: Request, res: Response, next: NextFunction) {
  */
 export function fetchById(req: Request, res: Response, next: NextFunction) {
   try {
-    res.send("TODO: getUser");
+    const data = userService.getUser(req.params.id);
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -40,7 +44,8 @@ export function fetchById(req: Request, res: Response, next: NextFunction) {
  */
 export function create(req: Request, res: Response, next: NextFunction) {
   try {
-    res.send("TODO: createUser");
+    const data = userService.createUser(req.body);
+    res.status(HttpStatus.CREATED).json({ data });
   } catch (err) {
     next(err);
   }
