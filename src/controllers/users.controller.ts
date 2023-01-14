@@ -9,6 +9,8 @@ import * as userService from "../services/user.service";
  * @param {Request} req
  * @param {Response} res
  * @param {Function} next
+ * @returns Promise
+ *
  */
 export async function fetchAll(
   _req: Request,
@@ -29,6 +31,8 @@ export async function fetchAll(
  * @param {Request} req
  * @param {Response} res
  * @param {Function} next
+ * @returns Promise
+ *
  */
 export async function fetchById(
   req: Request,
