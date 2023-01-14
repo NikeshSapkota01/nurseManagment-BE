@@ -4,10 +4,11 @@
 - [Yarn](https://yarnpkg.com/en/docs/install)
 - [PostgreSQL](https://www.postgresql.org/download/)
 
-#### Make migration file (Optional)
+#### Make new migration file (To create a new migration already here)
 
     $ yarn run make:migration user
     $ yarn run make:migration nurse
+    $ yarn run make:migration refreshToken
 
 #### Run migration
 
