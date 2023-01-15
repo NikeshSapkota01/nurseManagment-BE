@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs";
+
 import * as User from "../models/User.model";
 
 /**
@@ -25,10 +27,15 @@ export function getUser(id: Number | String) {
  * @param   {Object}  user
  * @returns {Promise}
  */
-export function addUser(data: {
+export async function addUser(data: {
   name: string;
   email: string;
   password: string;
 }) {
-  return User.addNewUser(data);
+  const { name, email, password } = data;
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  return User.addNewUser({ name, password: hashedPassword, email });
 }

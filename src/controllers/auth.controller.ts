@@ -1,3 +1,4 @@
+import HttpStatus from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
 import * as authService from "../services/auth.service";
@@ -35,9 +36,14 @@ export async function refreshToken(
  */
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = await authService.checkForUser(req, res);
+    const data = await authService.checkForUser(req);
     res.json({ data });
   } catch (err) {
+    if ((err.status = 401)) {
+      res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ message: "Please try to login with correct credentials!" });
+    }
     next(err);
   }
 }

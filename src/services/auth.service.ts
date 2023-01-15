@@ -1,8 +1,8 @@
+import bcrypt from "bcryptjs";
+import { Request } from "express";
+
 import * as Auth from "../models/Auth.model";
 import * as User from "../models/User.model";
-
-import HttpStatus from "http-status-codes";
-import { Request, Response } from "express";
 
 /**
  * Check if the refresh token is being stored in the database before sending another token to requested user,
@@ -30,18 +30,25 @@ export function checkForTokenInTable(token: string) {
  * and send it back to front end
  *
  * @param {Request} req
- * @param {Response} res
- * @param {Function} next
  *
  * @returns Promise
  *
  */
-export async function checkForUser(req: Request, res: Response) {
-  const { email } = req.body;
+export async function checkForUser(req: Request) {
+  const { email, password } = req.body;
   const user = await User.checkForUser(email);
 
-  if (user?.length < 1)
-    return res.status(HttpStatus.NOT_FOUND).send({ data: "Email not found" });
+  if (!user) {
+    return Promise.reject({
+      status: 401,
+    });
+  }
+
+  const isValidPassword = await bcrypt.compare(password, user.password);
+  if (!isValidPassword)
+    return Promise.reject({
+      status: 401,
+    });
 
   return user;
 }

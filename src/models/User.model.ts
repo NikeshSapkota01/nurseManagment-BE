@@ -16,6 +16,9 @@ export const addNewUser = (data: IUser) => {
   return db(TABLE_NAME).insert(data);
 };
 
-export const checkForUser = (email: string) => {
-  return db(TABLE_NAME).select().where("email", email);
+export const checkForUser = async (email: string) => {
+  const [result] = await db(TABLE_NAME)
+    .select("id", "email", "password")
+    .where("email", email);
+  return result;
 };
