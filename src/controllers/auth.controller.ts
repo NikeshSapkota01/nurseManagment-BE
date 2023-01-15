@@ -35,7 +35,7 @@ export async function refreshToken(
  */
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = await authService.checkForUser(req.body);
+    const data = await authService.checkForUser(req, res);
     res.json({ data });
   } catch (err) {
     next(err);

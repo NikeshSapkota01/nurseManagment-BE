@@ -1,7 +1,8 @@
-interface Auth {
-  email: string;
-  password: string;
-}
+import * as Auth from "../models/Auth.model";
+import * as User from "../models/User.model";
+
+import HttpStatus from "http-status-codes";
+import { Request, Response } from "express";
 
 /**
  * Check if the refresh token is being stored in the database before sending another token to requested user,
@@ -13,7 +14,7 @@ interface Auth {
  * @returns Promise
  */
 export function checkForTokenInTable(token: string) {
-  return "TODO: User.checkForTokenInTable then createJWTToken";
+  return Auth.checkForTokenInTable(token);
 }
 
 /**
@@ -35,6 +36,12 @@ export function checkForTokenInTable(token: string) {
  * @returns Promise
  *
  */
-export function checkForUser(user: Auth) {
-  return "TODO: UserModal.checkForUser then createJWTToken";
+export async function checkForUser(req: Request, res: Response) {
+  const { email } = req.body;
+  const user = await User.checkForUser(email);
+
+  if (user?.length < 1)
+    return res.status(HttpStatus.NOT_FOUND).send({ data: "Email not found" });
+
+  return user;
 }

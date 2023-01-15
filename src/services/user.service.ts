@@ -20,20 +20,6 @@ export function getUser(id: Number | String) {
 }
 
 /**
- * Check if user already exists.
- *
- * @param   {Object}  user
- * @returns {Promise}
- */
-export async function checkUserExists(data: {
-  name: string;
-  email: string;
-  password: string;
-}) {
-  return User.checkForUser(data.name);
-}
-
-/**
  * Create new user.
  *
  * @param   {Object}  user
