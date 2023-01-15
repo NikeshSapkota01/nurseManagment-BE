@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 
-import userRoutes from "./routes/user.route";
-import authRoute from "./routes/auth.route";
+import authRoute from "@routes/auth.route";
+import userRoutes from "@routes/user.route";
 
 /**
  * Contains all API routes for the application.

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-import * as User from "../models/User.model";
+import * as User from "@models/User.model";
 
 /**
  * Get all users.

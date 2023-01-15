@@ -17,8 +17,11 @@
     "paths": {
       "*": ["node_modules/*", "src/types/*"],
       "@routes/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"],
       "@models/*": ["src/models/*"],
-      "@controller/*": ["src/controller/*"],
+      "@services/*": ["src/services/*"],
+      "@validators/*": ["src/validators/*"],
+      "@controllers/*": ["src/controllers/*"],
       "@middlewares/*": ["src/middlewares/*"]
     }
   },

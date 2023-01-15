@@ -1,7 +1,7 @@
 import HttpStatus from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
-import * as authService from "../services/auth.service";
+import * as authService from "@services/auth.service";
 
 /**
  * Generate new access token

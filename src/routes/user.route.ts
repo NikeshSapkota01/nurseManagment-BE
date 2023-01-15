@@ -1,10 +1,10 @@
-import { Response, Router } from "express";
+import { Router } from "express";
 
-import * as userController from "../controllers/users.controller";
+import * as userController from "@controllers/users.controller";
 
-import validateRequest from "../utils/validate";
+import validateRequest from "@utils/validate";
 
-import { createUserSchema } from "../validators/user.validator";
+import { createUserSchema } from "@validators/user.validator";
 
 const router = Router();
 

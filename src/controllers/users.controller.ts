@@ -1,7 +1,7 @@
 import HttpStatus from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
-import * as userService from "../services/user.service";
+import * as userService from "@services/user.service";
 
 /**
  * Get all users.

@@ -5,9 +5,12 @@
   "main": "index.js",
   "_moduleAliases": {
     "@root": ".",
+    "@utils": "src/utils",
     "@routes": "src/routes",
     "@models": "src/models",
-    "@controller": "src/controller",
+    "@services": "src/services",
+    "@validators": "src/validators",
+    "@controllers": "src/controllers",
     "@middlewares": "src/middlewares"
   },
   "scripts": {

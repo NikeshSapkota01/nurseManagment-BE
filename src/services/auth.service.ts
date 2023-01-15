@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { Request } from "express";
 
-import * as Auth from "../models/Auth.model";
-import * as User from "../models/User.model";
+import * as Auth from "@models/Auth.model";
+import * as User from "@models/User.model";
 
 /**
  * Check if the refresh token is being stored in the database before sending another token to requested user,
