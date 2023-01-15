@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "This is backend of nurse management",
   "main": "index.js",
+  "_moduleAliases": {
+    "@root": ".",
+    "@routes": "src/routes",
+    "@models": "src/models",
+    "@controller": "src/controller",
+    "@middlewares": "src/middlewares"
+  },
   "scripts": {
     "dev": "nodemon src/index.ts",
     "make:migration": "yarn knex migrate:make --knexfile src/knexfile.js",
@@ -32,6 +39,7 @@
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.0",
     "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "yup": "^0.32.11"
@@ -43,6 +51,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.15",
     "@types/lodash": "^4.14.191",
+    "@types/module-alias": "^2.0.1",
     "@types/morgan": "^1.9.4",
     "@types/yup": "^0.32.0",
     "nodemon": "^2.0.20",
