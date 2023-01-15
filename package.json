@@ -37,6 +37,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
