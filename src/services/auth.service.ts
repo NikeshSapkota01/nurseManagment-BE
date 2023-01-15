@@ -1,42 +1,41 @@
 import bcrypt from "bcryptjs";
 import { Request } from "express";
 
-import * as Auth from "@models/Auth.model";
-import * as User from "@models/User.model";
+import * as UserModel from "@models/User.model";
+import * as AuthModel from "@models/Auth.model";
+
+import * as AuthUtils from "@utils/auth";
 
 /**
- * Check if the refresh token is being stored in the database before sending another token to requested user,
+ * Check refresh token in database,
  * if refresh token does not exist throw an error,
- * else extract the user details from the refresh token, and generate new access token and send to user
+ * else extract the user details from the refresh token,
+ * if mathces then  and generate new access token and send to user
  *
  * @param {String} token
- *
  * @returns Promise
  */
 export function checkForTokenInTable(token: string) {
-  return Auth.checkForTokenInTable(token);
+  return AuthModel.checkForRefreshToken(token);
 }
 
 /**
  * When user login by providing the username and password,
- * first we will check for the existence of user in the database using the username provided by the user,
- * then we will show error if the user does not exists, else we will validate the password provided by the user,
- * If both matched then we will extract the username and id of the user for JWT payload and pass it to generate
- * two tokens
- *
+ * check if user exists
+ * thrown error if user doesn't exists
+ * validate password of user
+ * if match then create both token
  * 1. authorize_token: token
  * 2. refresh_token: refreshToken
- *
  * and send it back to front end
  *
  * @param {Request} req
- *
  * @returns Promise
  *
  */
 export async function checkForUser(req: Request) {
   const { email, password } = req.body;
-  const user = await User.checkForUser(email);
+  const user = await UserModel.checkForUser(email);
 
   if (!user) {
     return Promise.reject({
@@ -50,5 +49,18 @@ export async function checkForUser(req: Request) {
       status: 401,
     });
 
-  return user;
+  const { id } = user;
+
+  const accessToken = AuthUtils.generateAccessToken({ id, email });
+  const refreshToken = AuthUtils.generateRefreshToken({ id, email });
+
+  const refreshTokenExists = await AuthModel.findRefreshTokenByUserId(id);
+
+  if (refreshTokenExists) {
+    await AuthModel.updateRefreshToken(id, refreshToken);
+  } else {
+    await AuthModel.insertRefreshToken(id, refreshToken);
+  }
+
+  return { accessToken, refreshToken };
 }
