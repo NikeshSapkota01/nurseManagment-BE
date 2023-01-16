@@ -2,8 +2,12 @@ import db from "../db";
 
 const TABLE_NAME = "userToken";
 
-export const checkForRefreshToken = (refreshToken: string) => {
-  return db(TABLE_NAME).select().where("refresh_token", refreshToken);
+export const checkForRefreshToken = async (refreshToken: any) => {
+  const [result] = await db(TABLE_NAME)
+    .select()
+    .where("refresh_token", refreshToken);
+
+  return result;
 };
 
 export const findRefreshTokenByUserId = (id: number) => {
@@ -17,9 +21,11 @@ export const insertRefreshToken = (id: number, refreshToken: string) => {
   });
 };
 
-export const updateRefreshToken = (id: number, refreshToken: string) => {
-  return db(TABLE_NAME)
+export const updateRefreshToken = async (id: number, refreshToken: string) => {
+  const result = await db(TABLE_NAME)
     .select()
     .where("user_id", id)
     .update({ user_id: id, refresh_token: refreshToken });
+
+  return result;
 };

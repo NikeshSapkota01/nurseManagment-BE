@@ -15,8 +15,19 @@ import * as AuthUtils from "@utils/auth";
  * @param {String} token
  * @returns Promise
  */
-export function checkForTokenInTable(token: string) {
-  return AuthModel.checkForRefreshToken(token);
+export async function checkForTokenInTable(req: Request) {
+  const { refreshToken } = req.body;
+
+  const token = await AuthModel.checkForRefreshToken(refreshToken);
+
+  if (!token?.refresh_token) return Promise.reject({ status: 403 });
+
+  const isValidToken: any = await AuthUtils.isTokenExpired(token.refresh_token);
+
+  const { id, email } = isValidToken;
+  const accessToken = await AuthUtils.generateAccessToken({ id, email });
+
+  return { accessToken };
 }
 
 /**
@@ -56,7 +67,7 @@ export async function checkForUser(req: Request) {
 
   const refreshTokenExists = await AuthModel.findRefreshTokenByUserId(id);
 
-  if (refreshTokenExists) {
+  if (refreshTokenExists?.length > 0) {
     await AuthModel.updateRefreshToken(id, refreshToken);
   } else {
     await AuthModel.insertRefreshToken(id, refreshToken);

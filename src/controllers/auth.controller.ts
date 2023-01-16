@@ -18,10 +18,18 @@ export async function refreshToken(
   next: NextFunction
 ) {
   try {
-    const data = await authService.checkForTokenInTable(req.body);
+    const data = await authService.checkForTokenInTable(req);
     res.json({ data });
   } catch (err) {
-    next(err);
+    if (err.status === 403) {
+      res
+        .status(HttpStatus.FORBIDDEN)
+        .json({ message: "Refresh token doesn't match!" });
+    } else if (err.message === "jwt expired") {
+      res.status(HttpStatus.UNAUTHORIZED).json({ message: "Token expired!" });
+    } else {
+      next(err);
+    }
   }
 }
 

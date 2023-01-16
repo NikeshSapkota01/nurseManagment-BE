@@ -11,3 +11,11 @@ export const generateRefreshToken = (data: { id: number; email: string }) => {
     expiresIn: "3d",
   });
 };
+
+export const isTokenExpired = async (token: string) => {
+  try {
+    return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+  } catch (err) {
+    throw new Error("jwt expired");
+  }
+};
