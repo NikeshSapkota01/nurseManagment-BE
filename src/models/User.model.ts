@@ -1,5 +1,5 @@
 import db from "../db";
-import { IUser } from "../types/user.types";
+import { IUser } from "user.types";
 
 const TABLE_NAME = "User";
 
@@ -8,7 +8,7 @@ export function fetchAllUsers() {
   return result;
 }
 
-export const fetchUser = (id: Number) => {
+export const fetchUser = (id: number) => {
   return db(TABLE_NAME).select("id", "name", "email").where("id", id);
 };
 

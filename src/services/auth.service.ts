@@ -12,7 +12,7 @@ import * as AuthUtils from "@utils/auth";
  * else extract the user details from the refresh token,
  * if mathces then  and generate new access token and send to user
  *
- * @param {String} token
+ * @param {Request} req
  * @returns Promise
  */
 export async function checkForTokenInTable(req: Request) {
