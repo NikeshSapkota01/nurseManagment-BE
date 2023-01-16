@@ -17,12 +17,16 @@ exports.seed = function (knex: Knex) {
         {
           name: "Nikesh",
           email: "nikesh@gmail.com",
-          password: "Abcd@123",
+          // Nikesh@123
+          password:
+            "$2a$10$nWmgGuVz3PwVQjgbhSNWwubXb7fCgWPSNAJKd1Ol37lLcFKHEZHam",
         },
         {
-          name: "SomeName",
+          name: "RandomName",
           email: "nikesh1@gmail.com",
-          password: "Abcd@123",
+          // Nikesh@123
+          password:
+            "$2a$10$skalYIs.h6GxslNJC85H2ugQ021DxkGXVvACoHZoRe3O6rBMpAinG",
         },
       ]);
     });

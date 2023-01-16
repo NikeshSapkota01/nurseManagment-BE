@@ -14,10 +14,12 @@
 
     $ yarn run migrate
 
-### make seed
+### make seed (To create a new seed already here)
 
-    $ yarn run make:seed User                                      │
+    $ yarn run make:seed User
+    $ yarn run make:seed Nurse
 
 ### run seed to insert some data
 
-    $ yarn run seed
+    $ yarn run seed1
+    $ yarn run seed2

@@ -19,7 +19,8 @@
     "migrate": "yarn knex migrate:latest --knexfile src/knexfile.js",
     "rollback": "yarn knex migrate:rollback --knexfile src/knexfile.js",
     "make:seed": "yarn knex seed:make --knexfile src/knexfile.js",
-    "seed": "yarn knex seed:run --knexfile src/knexfile.js"
+    "seed1": "yarn knex seed:run --specific User.ts --knexfile src/knexfile.js",
+    "seed2": "yarn knex seed:run --specific Nurse.ts --knexfile src/knexfile.js"
   },
   "repository": {
     "type": "git",
