@@ -2,6 +2,9 @@ import { Request, Response, Router } from "express";
 
 import authRoute from "@routes/auth.route";
 import userRoutes from "@routes/user.route";
+import nurseRoute from "@routes/nurse.route";
+
+import { authenticateRequest } from "@middlewares/auth";
 
 /**
  * Contains all API routes for the application.
@@ -19,5 +22,6 @@ router.get("/", (_req: Request, res: Response) => {
 
 router.use("/auth", authRoute);
 router.use("/users", userRoutes);
+router.use("/nurses", authenticateRequest, nurseRoute);
 
 export default router;
