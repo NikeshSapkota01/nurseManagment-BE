@@ -1,4 +1,7 @@
+import { get } from "lodash";
 import { NextFunction, Request, Response } from "express";
+
+import * as nurseService from "@services/nurse.service";
 
 /**
  * Get all nurse.
@@ -13,7 +16,8 @@ export async function fetchAllNurse(
   next: NextFunction
 ) {
   try {
-    res.send("TODO: getAllNurse");
+    const data = await nurseService.getAllNurse();
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -32,7 +36,10 @@ export async function fetchNurseById(
   next: NextFunction
 ) {
   try {
-    res.send("TODO: getNurse");
+    const nurseId = get(req, "params.nurseId");
+
+    const data = await nurseService.getNurse(nurseId);
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -51,7 +58,11 @@ export async function createNurse(
   next: NextFunction
 ) {
   try {
-    res.send("TODO: createNurse");
+    const userId = get(req, "user.id");
+    const body = req.body;
+
+    const data = await nurseService.getNurse({ ...body, userId });
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -70,7 +81,9 @@ export async function updateNurse(
   next: NextFunction
 ) {
   try {
-    res.send("TODO: updateNurseById");
+    // need to find first then update
+    const data = await nurseService.updateNurseById(req.body);
+    res.json({ data });
   } catch (err) {
     next(err);
   }
@@ -89,7 +102,9 @@ export async function deleteNurse(
   next: NextFunction
 ) {
   try {
-    res.send("TODO: deleteNurseById");
+    const nurseId = get(req, "params.nurseId");
+    await nurseService.deleteNurseById(nurseId);
+    res.json({ data: "Deleted Successfully!" });
   } catch (err) {
     next(err);
   }

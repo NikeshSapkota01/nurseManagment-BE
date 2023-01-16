@@ -14,10 +14,10 @@ export function getAllUsers() {
 /**
  * Get a user.
  *
- * @param   {Number|String}  id
+ * @param   {number|string}  id
  * @returns {Promise}
  */
-export function getUser(id: Number | String) {
+export function getUser(id: number | string) {
   return "TODO: UserModal.getUser(id)";
 }
 
