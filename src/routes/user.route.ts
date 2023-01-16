@@ -1,10 +1,9 @@
 import { Router } from "express";
 
-import * as userController from "@controllers/users.controller";
-
 import validateRequest from "@utils/validate";
-
+import { authenticateRequest } from "@middlewares/auth";
 import { createUserSchema } from "@validators/user.validator";
+import * as userController from "@controllers/users.controller";
 
 const router = Router();
 
@@ -16,7 +15,7 @@ router.get("/", userController.fetchAll);
 /**
  * GET /api/users/:id
  */
-router.get("/:id", userController.fetchById);
+router.get("/:id", authenticateRequest, userController.fetchById);
 
 /**
  * POST /api/users
