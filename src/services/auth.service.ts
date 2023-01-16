@@ -16,7 +16,11 @@ import * as AuthUtils from "@utils/auth";
  * @returns Promise
  */
 export async function checkForTokenInTable(req: Request) {
-  const { refreshToken } = req.body;
+  const { authorization } = req.headers;
+
+  const [tokenTag, refreshToken = ""] = authorization.split(" ");
+
+  if (tokenTag !== "Bearer") return Promise.reject({ status: 403 });
 
   const token = await AuthModel.checkForRefreshToken(refreshToken);
 
