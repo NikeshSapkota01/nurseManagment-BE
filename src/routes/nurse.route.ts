@@ -1,40 +1,31 @@
 import { Response, Router } from "express";
+import * as nurseController from "@controllers/nurse.controller";
 
 const router = Router();
 
 /**
  * GET /api/nurses
  */
-router.get("/", (_, res: Response) => {
-  res.send("TODO: nurseController.fetchAll");
-});
+router.get("/", nurseController.fetchAllNurse);
 
 /**
- * GET /api/nurses/::nurseId
+ * GET /api/nurses/:nurseId
  */
-router.get("/:nurseId", (_, res: Response) => {
-  res.send("TODO: nurseController.fetchById");
-});
+router.get("/:nurseId", nurseController.fetchNurseById);
 
 /**
  * POST /api/nurses
  */
-router.post("/", (_, res: Response) => {
-  res.send("TODO: nurseController.create");
-});
+router.post("/", nurseController.createNurse);
 
 /**
- * PUT /api/nurses/::nurseId
+ * PUT /api/nurses/:nurseId
  */
-router.put("/:nurseId", (_, res: Response) => {
-  res.send("TODO: nurseController.put");
-});
+router.put("/:nurseId", nurseController.updateNurse);
 
 /**
- * DELETE /api/nurses/::nurseId
+ * DELETE /api/nurses/:nurseId
  */
-router.delete("/:nurseId", (_, res: Response) => {
-  res.send("TODO: nurseController.delete");
-});
+router.delete("/:nurseId", nurseController.deleteNurse);
 
 export default router;
