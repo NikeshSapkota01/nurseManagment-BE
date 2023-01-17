@@ -1,4 +1,5 @@
 import { get } from "lodash";
+import HttpStatus from "http-status-codes";
 import { NextFunction, Request, Response } from "express";
 
 import * as nurseService from "@services/nurse.service";
@@ -11,12 +12,13 @@ import * as nurseService from "@services/nurse.service";
  * @param {Function} next
  */
 export async function fetchAllNurse(
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const data = await nurseService.getAllNurse();
+    const userId = get(req, "user.id");
+    const data = await nurseService.getAllNurse(userId);
     res.json({ data });
   } catch (err) {
     next(err);
@@ -24,7 +26,7 @@ export async function fetchAllNurse(
 }
 
 /**
- * Get a nurse by its id.
+ * Get a nurse by its userId
  *
  * @param {Request} req
  * @param {Response} res
@@ -36,9 +38,10 @@ export async function fetchNurseById(
   next: NextFunction
 ) {
   try {
+    const userId = get(req, "user.id");
     const nurseId = get(req, "params.nurseId");
 
-    const data = await nurseService.getNurse(nurseId);
+    const data = await nurseService.getNurse(userId, +nurseId);
     res.json({ data });
   } catch (err) {
     next(err);
@@ -58,10 +61,10 @@ export async function createNurse(
   next: NextFunction
 ) {
   try {
-    const userId = get(req, "user.id");
+    const created_by = get(req, "user.id");
     const body = req.body;
 
-    const data = await nurseService.getNurse({ ...body, userId });
+    const data = await nurseService.createNurse({ ...body, created_by });
     res.json({ data });
   } catch (err) {
     next(err);
@@ -82,9 +85,16 @@ export async function updateNurse(
 ) {
   try {
     // need to find first then update
-    const data = await nurseService.updateNurseById(req.body);
+    const userId = get(req, "user.id");
+    const nurseId = get(req, "params.nurseId");
+    const data = await nurseService.updateNurseById(userId, +nurseId, req.body);
     res.json({ data });
   } catch (err) {
+    if (err.status === 404) {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: "Nurse not found!" });
+    }
     next(err);
   }
 }
@@ -102,10 +112,17 @@ export async function deleteNurse(
   next: NextFunction
 ) {
   try {
+    const userId = get(req, "user.id");
     const nurseId = get(req, "params.nurseId");
-    await nurseService.deleteNurseById(nurseId);
+    await nurseService.deleteNurseById(userId, +nurseId);
+
     res.json({ data: "Deleted Successfully!" });
   } catch (err) {
+    if (err.status === 404) {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: "Nurse not found!" });
+    }
     next(err);
   }
 }

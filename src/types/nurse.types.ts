@@ -1,4 +1,4 @@
-enum WeekDays {
+enum WorkingDays {
   SUNDAY,
   MONDAY,
   TUESDAY,
@@ -9,17 +9,18 @@ enum WeekDays {
 }
 
 export interface INurse {
-  id?: string;
-  firstName: string;
+  created_by?: number;
+  firstName?: string;
   middleName?: string;
-  lastName: string;
-  email: string;
+  lastName?: string;
+  email?: string;
   contact?: string;
-  weekdays?: WeekDays[] | string;
+  workingDays?: WorkingDays[] | string;
   duty_start_time?: string;
   duty_end_time?: string;
   image?: string;
   isRoundingManager?: boolean;
   createdBy?: number;
   is_deleted?: boolean;
+  updated_at?: string;
 }

@@ -1,42 +1,47 @@
 import db from "../db";
-import { IUser } from "user.types";
+import { INurse } from "nurse.types";
 
-const TABLE_NAME = "User";
+const TABLE_NAME = "Nurse";
 
 export function fetchAllNurse(userId: number) {
-  const result = db(TABLE_NAME).select().where("user_id", userId);
+  const result = db(TABLE_NAME).select().where("created_by", userId);
   return result;
 }
 
-export const fetchNurse = (nurseId: number) => {
-  return db(TABLE_NAME).select().where("id", nurseId);
+export const fetchNurse = (userId: number, nurseId: number) => {
+  return db(TABLE_NAME)
+    .select()
+    .where("created_by", userId)
+    .where("id", nurseId);
 };
 
-export const addNewNurse = (data: IUser) => {
-  return db(TABLE_NAME).insert(data);
-};
-
-export const checkForNurse = async (nurseId: number) => {
-  const [result] = await db(TABLE_NAME).select().where("id", nurseId);
+export const addNewNurse = async (data: INurse) => {
+  const result = await db(TABLE_NAME).insert(data).returning("*");
   return result;
 };
 
-export const updateNurseById = async (data: IUser) => {
-  const nurse = { ...data, updated_at: Date.now() };
+export const checkForNurse = async (userId: number, nurseId: number) => {
+  const [result] = await db(TABLE_NAME)
+    .select()
+    .where("created_by", userId)
+    .where("id", nurseId);
+  return result;
+};
 
+export const updateNurseById = async (nurseId: number, nurse: INurse) => {
   const result = await db(TABLE_NAME)
-    .where("user_id", data.id)
+    .where("id", nurseId)
     .update(nurse)
     .returning("*");
 
   return result;
 };
 
-export const deleteNurseById = async (nurseId: number, id: number) => {
+export const deleteNurseById = async (userId: number, nurseId: number) => {
   const result = await db(TABLE_NAME)
-    .where("user_id", id)
+    .where("created_by", userId)
     .where("id", nurseId)
-    .del();
+    .update("is_deleted", true);
 
   return result;
 };

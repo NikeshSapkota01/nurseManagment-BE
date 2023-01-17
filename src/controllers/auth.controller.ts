@@ -22,11 +22,13 @@ export async function refreshToken(
     res.json({ data });
   } catch (err) {
     if (err.status === 403) {
-      res
+      return res
         .status(HttpStatus.FORBIDDEN)
         .json({ message: "Refresh token doesn't match!" });
     } else if (err.message === "jwt expired") {
-      res.status(HttpStatus.UNAUTHORIZED).json({ message: "Token expired!" });
+      return res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json({ message: "Token expired!" });
     } else {
       next(err);
     }
@@ -48,7 +50,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     res.json({ data });
   } catch (err) {
     if (err.status === 401) {
-      res
+      return res
         .status(HttpStatus.UNAUTHORIZED)
         .json({ message: "Please try to login with correct credentials!" });
     }
