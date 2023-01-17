@@ -95,11 +95,15 @@ export async function updateNurse(
     res.json({ data });
   } catch (err) {
     if (err.status === 404) {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: "Nurse not found!" });
+      res.status(HttpStatus.NOT_FOUND).json({ message: "Nurse not found!" });
+    } else if (
+      err.code === "23505" &&
+      err.constraint === "nurse_email_unique"
+    ) {
+      res.status(HttpStatus.CONFLICT).json({ message: "Email already exists" });
+    } else {
+      next(err);
     }
-    next(err);
   }
 }
 

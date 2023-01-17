@@ -1,4 +1,10 @@
-import { Response, Router } from "express";
+import { Router } from "express";
+
+import {
+  createNurseSchema,
+  updateNurseSchema,
+} from "@validators/nurse.validator";
+import validateRequest from "@utils/validate";
 import * as nurseController from "@controllers/nurse.controller";
 
 const router = Router();
@@ -16,12 +22,20 @@ router.get("/:nurseId", nurseController.fetchNurseById);
 /**
  * POST /api/nurses
  */
-router.post("/", nurseController.createNurse);
+router.post(
+  "/",
+  validateRequest(createNurseSchema),
+  nurseController.createNurse
+);
 
 /**
  * PUT /api/nurses/:nurseId
  */
-router.put("/:nurseId", nurseController.updateNurse);
+router.put(
+  "/:nurseId",
+  validateRequest(updateNurseSchema),
+  nurseController.updateNurse
+);
 
 /**
  * DELETE /api/nurses/:nurseId

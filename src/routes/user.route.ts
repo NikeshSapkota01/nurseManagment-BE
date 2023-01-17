@@ -10,7 +10,7 @@ const router = Router();
 /**
  * GET /api/users
  */
-router.get("/", userController.fetchAll);
+router.get("/", authenticateRequest, userController.fetchAll);
 
 /**
  * GET /api/users/:id
