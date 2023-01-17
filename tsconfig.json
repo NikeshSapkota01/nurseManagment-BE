@@ -20,6 +20,7 @@
       "@utils/*": ["src/utils/*"],
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
+      "@constants/*": ["src/constants/*"],
       "@validators/*": ["src/validators/*"],
       "@controllers/*": ["src/controllers/*"],
       "@middlewares/*": ["src/middlewares/*"]

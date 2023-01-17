@@ -1,12 +1,4 @@
-enum WorkingDays {
-  SUNDAY,
-  MONDAY,
-  TUESDAY,
-  WEDNESDAY,
-  THURSDAY,
-  FRIDAY,
-  SATURDAY,
-}
+import { WorkingDays } from "@constants/enums";
 
 export interface INurse {
   created_by?: number;

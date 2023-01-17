@@ -67,7 +67,11 @@ export async function createNurse(
     const data = await nurseService.createNurse({ ...body, created_by });
     res.json({ data });
   } catch (err) {
-    next(err);
+    if (err.code === "23505" && err.constraint === "nurse_email_unique") {
+      res.status(HttpStatus.CONFLICT).json({ message: "Email already exists" });
+    } else {
+      next(err);
+    }
   }
 }
 
