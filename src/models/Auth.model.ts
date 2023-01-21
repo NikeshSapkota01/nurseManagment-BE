@@ -2,7 +2,7 @@ import db from "../db";
 
 const TABLE_NAME = "userToken";
 
-export const checkForRefreshToken = async (refreshToken: any) => {
+export const checkForRefreshToken = async (refreshToken: string) => {
   const [result] = await db(TABLE_NAME)
     .select()
     .where("refresh_token", refreshToken);

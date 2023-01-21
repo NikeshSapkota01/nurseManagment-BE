@@ -6,9 +6,3 @@ export const createUserSessionSchema = object({
     email: string().email("Must be valid email").required("Email is required"),
   }),
 });
-
-export const createUserTokenSchema = object().shape({
-  headers: object().shape({
-    authorization: string().required().label("Authorization"),
-  }),
-});
