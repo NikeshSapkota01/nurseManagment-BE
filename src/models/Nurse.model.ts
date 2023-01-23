@@ -4,7 +4,10 @@ import { INurse } from "nurse.types";
 const TABLE_NAME = "Nurse";
 
 export function fetchAllNurse(userId: number) {
-  const result = db(TABLE_NAME).select().where("created_by", userId);
+  const result = db(TABLE_NAME)
+    .select()
+    .where("created_by", userId)
+    .where("is_deleted", false);
   return result;
 }
 
@@ -12,7 +15,8 @@ export const fetchNurse = (userId: number, nurseId: number) => {
   return db(TABLE_NAME)
     .select()
     .where("created_by", userId)
-    .where("id", nurseId);
+    .where("id", nurseId)
+    .where("is_deleted", false);
 };
 
 export const addNewNurse = async (data: INurse) => {

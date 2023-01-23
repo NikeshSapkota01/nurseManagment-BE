@@ -124,7 +124,7 @@ export async function deleteNurse(
     const nurseId = get(req, "params.nurseId");
     await nurseService.deleteNurseById(userId, +nurseId);
 
-    res.json({ data: "Deleted Successfully!" });
+    res.json({ data: "Deleted Successfully!", nurseId });
   } catch (err) {
     if (err.status === 404) {
       return res
