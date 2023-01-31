@@ -5,7 +5,7 @@
 
 export default {
   // Automatically clear mock calls, instances, contexts and results before every test
-  clearMocks: true,
+  // clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
   //   collectCoverage: true,
@@ -38,6 +38,7 @@ export default {
 
   moduleNameMapper: {
     "^@root(.*)$": "<rootDir>.$1",
+    "^@utils(.*)$": "<rootDir>/src/utils$1",
     "^@routes(.*)$": "<rootDir>/src/routes$1",
     "^@models(.*)$": "<rootDir>/src/models$1",
     "^@uploads(.*)$": "<rootDir>/src/uploads$1",
