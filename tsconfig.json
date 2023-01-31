@@ -19,6 +19,7 @@
       "@routes/*": ["src/routes/*"],
       "@utils/*": ["src/utils/*"],
       "@models/*": ["src/models/*"],
+      "@uploads/*": ["src/uploads/*"],
       "@services/*": ["src/services/*"],
       "@constants/*": ["src/constants/*"],
       "@validators/*": ["src/validators/*"],
