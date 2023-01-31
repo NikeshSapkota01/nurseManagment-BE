@@ -13,6 +13,7 @@ import { WorkingDays } from "@constants/enums";
 // "image": "path/to/image.jpg",
 // "isRoundingManager": true
 // };
+const timeFormat = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
 export const createNurseSchema = object({
   body: object({
@@ -25,8 +26,12 @@ export const createNurseSchema = object({
       .max(128),
     contact: string().required("contact is required").max(20),
     working_days: array().of(mixed().oneOf(Object.values(WorkingDays))),
-    duty_start_time: string(),
-    duty_end_time: string(),
+    duty_start_time: string()
+      .matches(timeFormat, "Start time must be in the format HH:MM")
+      .nullable(),
+    duty_end_time: string()
+      .matches(timeFormat, "Start time must be in the format HH:MM")
+      .nullable(),
     image: string().max(1024),
     isRoundingManager: boolean(),
   }),

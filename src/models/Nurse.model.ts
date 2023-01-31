@@ -13,7 +13,18 @@ export function fetchAllNurse(userId: number) {
 
 export const fetchNurse = (userId: number, nurseId: number) => {
   return db(TABLE_NAME)
-    .select()
+    .select(
+      "id",
+      "firstName",
+      "middleName",
+      "lastName",
+      "email",
+      "contact",
+      "working_days",
+      "duty_start_time",
+      "duty_end_time",
+      "isRoundingManager"
+    )
     .where("created_by", userId)
     .where("id", nurseId)
     .where("is_deleted", false);
