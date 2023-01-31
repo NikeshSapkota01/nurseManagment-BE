@@ -134,3 +134,30 @@ export async function deleteNurse(
     next(err);
   }
 }
+
+/**
+ * upload Image to nurse.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Function} next
+ */
+export async function uploadImage(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const userId = get(req, "user.id");
+    const nurseId = get(req, "body.nurseId");
+    const image = get(req, "body.image");
+
+    const data = await nurseService.updateNurseById(userId, +nurseId, {
+      image,
+    });
+
+    res.json({ data });
+  } catch (err) {
+    next(err);
+  }
+}

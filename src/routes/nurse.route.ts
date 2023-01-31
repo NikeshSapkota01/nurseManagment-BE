@@ -6,6 +6,7 @@ import {
 } from "@validators/nurse.validator";
 import validateRequest from "@utils/validate";
 import * as nurseController from "@controllers/nurse.controller";
+import { uploadPostImageDisk } from "@uploads/single-upload-disk";
 
 const router = Router();
 
@@ -36,6 +37,12 @@ router.put(
   validateRequest(updateNurseSchema),
   nurseController.updateNurse
 );
+
+/**
+ * POST /api/nurses/images
+ */
+
+router.post("/images", uploadPostImageDisk, nurseController.uploadImage);
 
 /**
  * DELETE /api/nurses/:nurseId
