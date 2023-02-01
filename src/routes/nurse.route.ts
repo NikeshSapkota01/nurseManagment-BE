@@ -41,7 +41,6 @@ router.put(
 /**
  * POST /api/nurses/images
  */
-
 router.post("/images", uploadPostImageDisk, nurseController.uploadImage);
 
 /**

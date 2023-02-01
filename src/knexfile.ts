@@ -2,11 +2,11 @@ require("dotenv").config({ path: `${__dirname}/../.env` });
 
 // Default configuration for database connection (different for dev and test)
 const connection = {
-  host: process.env.DB_HOST || "127.0.0.1",
-  port: process.env.DB_PORT || "5432",
-  user: process.env.DB_USER || "nurse_management",
-  password: process.env.DB_PASSWORD || "postgres",
-  database: process.env.DB_NAME || "postgres",
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   charset: "utf8",
   timezone: "UTC",
 };

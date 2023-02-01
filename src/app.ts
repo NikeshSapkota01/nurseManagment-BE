@@ -1,4 +1,5 @@
 import cors from "cors";
+import path from "path";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
@@ -19,6 +20,7 @@ app.use(
 );
 app.use(morgan("combined"));
 
+app.use("/images", express.static(path.join(__dirname, "../", "images")));
 app.use("/api", routes);
 
 app.use((_req: Request, res: Response, next: NextFunction) => {

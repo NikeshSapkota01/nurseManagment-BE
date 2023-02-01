@@ -57,7 +57,7 @@ export async function fetchById(
  */
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const data = await userService.addUser(req.body);
+    await userService.addUser(req.body);
 
     res.status(HttpStatus.CREATED).json({ data: "User created successfully!" });
   } catch (err) {

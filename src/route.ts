@@ -15,7 +15,7 @@ const router = Router();
  * GET /api
  */
 router.get("/", (_req: Request, res: Response) => {
-  res.json({
+  res.status(200).json({
     AppName: process.env.APP_NAME,
   });
 });
