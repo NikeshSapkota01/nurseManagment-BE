@@ -93,3 +93,35 @@ describe("Post /users", () => {
     });
   });
 });
+
+describe("Get user", () => {
+  const user = {
+    id: 5,
+    name: "Nikesh",
+    email: "nikesh@gmail.com",
+  };
+
+  let requestMock = {};
+  let responseMock = {
+    json: jest.fn(),
+  };
+  let nextFunctionMock = jest.fn();
+
+  it("should call mocked user service ", () => {
+    userService.getAllUsers();
+
+    expect(userService.getAllUsers).toBeCalled();
+  });
+
+  it("should get all users with message of 'User fetched successfully'", async () => {
+    (userService.getAllUsers as jest.Mock).mockResolvedValueOnce(user);
+
+    await userController.fetchAll(
+      requestMock as any,
+      responseMock as any,
+      nextFunctionMock as any
+    );
+
+    expect(responseMock.json).toBeCalledWith({ data: user });
+  });
+});

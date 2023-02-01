@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import request from "supertest";
-import app from "../app";
+import app from "../../app";
 
 // we will doing end to end testing here
 
