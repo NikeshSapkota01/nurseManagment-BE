@@ -23,7 +23,7 @@
     "make:seed": "yarn knex seed:make --knexfile src/knexfile.js",
     "seed1": "yarn knex seed:run --specific User.ts --knexfile src/knexfile.js",
     "seed2": "yarn knex seed:run --specific Nurse.ts --knexfile src/knexfile.js",
-    "test": "jest --port=5000 --watch --detectOpenHandles",
+    "test": "jest --watch --detectOpenHandles",
     "coverage": "jest --coverage --detectOpenHandles"
   },
   "repository": {
