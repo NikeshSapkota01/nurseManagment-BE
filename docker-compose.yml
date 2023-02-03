@@ -1,0 +1,42 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  web:
+    image: nursemanagement_server:1.0
+    depends_on:
+      - db
+    environment:
+      DB_HOST: postgres.sevice
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_CLIENT: pg
+      DB_NAME: nurse_management
+      PORT: 8000
+      ACCESS_TOKEN_SECRET: ACCESS_TOKEN_SECRET
+      REFRESH_TOKEN_SECRET: REFRESH_TOKEN_SECRET
+    ports:
+      - 4000:8000
+    volumes:
+      - ./images:/app/images
+
+  db:
+    container_name: postgres.sevice 
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_DB: nurse_management
+    ports:
+      - 5431:5432
+    volumes:
+      - docker-volume:/var/lib/postgresql/data:ro
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 4001:8080
+    

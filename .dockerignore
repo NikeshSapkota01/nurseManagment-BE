@@ -6,9 +6,6 @@ npm-debug.log*
 # Dependency directories
 node_modules
 
-# build / generate output
-dist
-
 # dotenv environment variable files
 .env
 
@@ -27,6 +24,3 @@ logs
 
 # uploads
 images
-
-#test coverage
-coverage
